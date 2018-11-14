@@ -1,0 +1,100 @@
+.register-form
+{
+    display: flex;
+    flex-direction: column;
+}
+.register-form__wrapper
+{
+    display: flex;
+}
+.register-form__wrapper_left
+{
+    width: 250px;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+.register-form__wrapper_right
+{
+    flex-grow: 1;
+    flex-direction: column;
+}
+.register-form__button_file
+{
+    align-self: flex-start;
+}
+.register-form__button_submit
+{
+    align-self: center;
+}
+
+
+
+
+.add-course-form
+{
+    display: flex;
+    flex-direction: column;
+}
+.add-course-form__wrapper
+{
+    display: flex;
+}
+.add-course-form__wrapper_left
+{
+    width: 250px;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+.add-course-form__wrapper_right
+{
+    flex-grow: 1;
+    flex-direction: column;
+}
+.add-course-form__button_file
+{
+    align-self: flex-start;
+}
+.add-course-form__button_submit
+{
+    align-self: center;
+}
+
+
+
+
+.add-student-form
+{
+    display: flex;
+    flex-direction: column;
+}
+.add-student-form__wrapper
+{
+    display: flex;
+}
+.add-student-form__wrapper_left
+{
+    width: 250px;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+.add-student-form__wrapper_right
+{
+    flex-grow: 1;
+    flex-direction: column;
+}
+.add-student-form__button_file
+{
+    align-self: flex-start;
+}
+.add-student-form__button_submit
+{
+    align-self: center;
+}
+
+
+
+
+div.padd{ margin:2px; padding:12px; border:1px solid black; }
+#myForm input[type="text"]{ font-size: 11pt; font-style: oblique; border:1px solid black; width: 400px;}
+#myForm input.XX{ font-weight:bolder; color:white;  background:red; }
+#myForm input.XX:hover{ color:#FE6; background:#E20; }

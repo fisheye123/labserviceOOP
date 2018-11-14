@@ -1,0 +1,258 @@
+html,
+body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+#loginBox
+{
+    width: 180px; 
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 -90px;
+}
+.wrapper
+{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.header
+{
+    flex-shrink: 0;
+}
+.user-block
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.user-block__name
+{
+    display: flex;
+    justify-content: flex-end;
+}
+.bread-crumbs__list
+{
+    display: flex;
+    list-style: none;
+}
+.bread-crumbs__item:not(:last-child)::after
+{
+    content: ">";
+    margin: 0 5px;
+}
+.button
+{
+    text-decoration: none; 
+    align-items: flex-start;
+    text-align: center;
+    cursor: default;
+    color: buttontext;
+    background-color: buttonface;
+    box-sizing: border-box;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+    -webkit-appearance: push-button;
+    user-select: none;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    -webkit-writing-mode: horizontal-tb !important;
+}
+/* 
+ * Как воспринимается со стороны индексации в поисковиках? 
+ *
+ */
+.bread-crumbs__item:last-child a {
+    pointer-events: none;
+    text-decoration: none;
+    cursor: default;
+    color: #000;
+}
+.main-block
+{
+    display: flex;
+    flex-grow: 1;
+}
+.menu
+{
+    width: 250px;
+    flex-shrink: 0;
+}
+.page
+{
+    flex-grow: 1;
+}
+.content
+{
+    flex-grow: 1;
+}
+.menu-list__item
+{
+    list-style: none;
+}
+.menu-list__submenu
+{
+    padding-left: 15px;
+}
+.menu-list__sub-item
+{
+    list-style: none;
+}
+.hideme
+{
+    display: none;
+}
+.showHidden
+{
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+#teacherBox
+{
+    display: flex;
+}
+#teacherLink
+{
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+#teacherLogoutImg
+{
+    margin: 0px 5px;
+    flex-direction: column;
+}
+
+/*Страница добавления лабораторной для преподавателя*/
+.add-lab-form
+{
+    display: flex;
+    flex-direction: column;
+}
+.add-lab-form__wrapper
+{
+    display: flex;
+}
+.add-lab-form__wrapper_left
+{
+    width: 250px;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+.add-lab-form__wrapper_right
+{
+    flex-grow: 1;
+    flex-direction: column;
+}
+.add-lab-form__button_file
+{
+    align-self: flex-start;
+}
+.add-lab-form__button_submit
+{
+    align-self: center;
+}
+
+/*Страница добавления лабораторной для преподавателя*/
+.add-course-form
+{
+    display: flex;
+    flex-direction: column;
+}
+.add-course-form__wrapper
+{
+    display: flex;
+}
+.add-course-form__wrapper_left
+{
+    width: 250px;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+.add-course-form__wrapper_right
+{
+    flex-grow: 1;
+    flex-direction: column;
+}
+.add-course-form__button_file
+{
+    align-self: flex-start;
+}
+.add-course-form__button_submit
+{
+    align-self: center;
+}
+
+
+
+.exit
+{
+    border: none;
+    background: none;
+    width: 18px;
+    height: 18px;
+}
+.img
+{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+/*Страница показа лабораторной для студента*/
+.lab-form
+{
+	display: flex;
+	flex-direction: column;
+}
+.lab-form__item
+{
+	
+}
+.lab-form__wrapper
+{
+	display: flex;
+}
+.lab-form__wrapper_main
+{
+	
+}
+.lab-form__wrapper_left
+{
+	width: 250px;
+	flex-shrink: 0;
+	flex-direction: column;
+}
+.lab-form__wrapper_right
+{
+	flex-grow: 1;
+	flex-direction: column;
+}
+
+.lab-form__button_file
+{
+	align-self: flex-start;
+}
+.lab-form__button_submit
+{
+    align-self: center;
+}
