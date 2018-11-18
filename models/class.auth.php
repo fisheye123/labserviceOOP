@@ -4,7 +4,7 @@ require_once 'class.admin.php';
 require_once 'class.teacher.php';
 require_once 'class.course.php';
 
-class UnknownUser{
+class Auth{
     private static $_instance;
     private $SQLBase;
     private $returnUser;

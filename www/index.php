@@ -9,9 +9,9 @@ require_once '../controllers/AdminController.php';
 //require_once '../controllers/TeacherController.php';
 //require_once '../controllers/CourseController.php';
 
-require_once '../name/class.db.php';
-require_once '../name/class.auth.php';
-require_once '../name/mainFunctions.php';
+require_once '../models/class.db.php';
+require_once '../models/class.auth.php';
+require_once '../models/mainFunctions.php';
 
 session_start();
 

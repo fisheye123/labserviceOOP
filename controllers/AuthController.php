@@ -2,13 +2,11 @@
 require_once 'BaseController.php';
 
 
-
+//Контроллер авторизации
 class AuthController extends BaseController{
 
     /**
     * Загрузка страницы авторизации
-    * 
-    * @param object $twig - шаблонизатор
     */
     public function indexAction () {
         $tmpl = $this->myLoadTemplate('auth');
@@ -26,7 +24,7 @@ class AuthController extends BaseController{
     function loginAction() {
        $login = filter_input(INPUT_POST, 'login');
        $password = filter_input(INPUT_POST, 'password');
-       $auth = UnknownUser::GetInstance();
+       $auth = Auth::GetInstance();
        $resData = $auth->Authorizator($login, $password);
        $_SESSION['User'] = $auth->GetUser();
        echo json_encode($resData);

@@ -1,36 +1,35 @@
 <?php
 
+//Базовый  класс контроллера
 abstract class BaseController{
     
     protected $userClass;
     protected $twig;
     
+    /**
+     * Конструктор
+     * @param object $userClass объект пользователя
+     * @param object $twig объект шаблонизатора
+     */
     function __construct($userClass, $twig){
         $this->userClass = $userClass;
         $this->twig = $twig;
     }
     
+    //Загрузка стартовой страницы контроллера
     abstract public function indexAction();
     
     /**
      * Выход из авторизации
-     * 
      */
     public function logoutAction(){
         unset($_SESSION['User']);
         $this->redirect();
     }
-    
-    public function badaddressAction(){
-        //$this->redirect();
-        echo 'SHTOOO';
-    }
-    
 
    /**
     * Загрузка шаблона
     * 
-    * @param object $twig объект шаблонизатора
     * @param string $templateName название файла шаблонизатора
     */
     protected function myLoadTemplate ($templateName) {

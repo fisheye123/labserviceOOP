@@ -2,10 +2,11 @@
 
 require_once 'BaseController.php';
 
-
+//Контроллер администратора
 class AdminController extends BaseController{
+    
     /**
-     * Загрузка главной страницы админки(СДЕЛАНО)
+     * Загрузка главной страницы администратора
      */ 
     public function indexAction() {
         $tmpl = $this->myLoadTemplate('Admin');
@@ -17,7 +18,7 @@ class AdminController extends BaseController{
     
     
     /**
-    * Загрузка страницы управления курсами(СДЕЛАНО)
+    * Загрузка страницы управления курсами
     */
     public function courseAction() {
         $rsCourse = $this->userClass->ShowCourse();
@@ -31,7 +32,7 @@ class AdminController extends BaseController{
    
    
    /**
-    * Загрузка страницы управления лабораторными (СДЕЛАНО)
+    * Загрузка страницы управления лабораторными
     */
    public function labAction() {
         $rsLab = $this->userClass->ShowLab();
@@ -47,8 +48,7 @@ class AdminController extends BaseController{
     }
     
     /**
-    * Загрузка страницы управления преподавателями(СДЕЛАНО)
-    *
+    * Загрузка страницы управления преподавателями
     */
    public function teacherAction() {
        $rsTeacher = $this->userClass->ShowTeacher();
@@ -64,7 +64,7 @@ class AdminController extends BaseController{
    }
    
    /**
-    * Загрузка страницы управления студентами (Сделано)
+    * Загрузка страницы управления студентами
     */
    public function studentAction() {
         $rsStudent = $this->userClass->ShowStudent();
@@ -78,9 +78,10 @@ class AdminController extends BaseController{
    }
 
    /**
-    * Добавление курса(СДЕЛАНО)
+    * Добавление курса
     * 
-    * @return json массив, содержащий информацию о добавлении курса
+    * @return json массив [success, message]
+    * Массив содержит информацию о результате операции
     */
    public function addcourseAction() {
        $title = filter_input(INPUT_POST, 'course_title');
@@ -94,9 +95,10 @@ class AdminController extends BaseController{
    }
 
    /**
-    * Обновление данных курса(СДЕЛАНО)
+    * Обновление данных курса
     * 
-    * @return json массив, содержащий информацию об обновлении данных курса
+    * @return json массив[success, message]
+    * Массив содержит информацию о результате операции
     */
    public function updatecourseAction() {
        $id = filter_input(INPUT_POST, 'id');
@@ -111,9 +113,10 @@ class AdminController extends BaseController{
    }
 
    /**
-    * Удаление курса(СДЕЛАНО)
+    * Удаление курса
     * 
-    * @return json массив, содержащий информацию об удалении курса
+    * @return json массив[success, message]
+    * Массив содержит информацию о результате операции
     */
    function deletecourseAction() {
        $id = filter_input(INPUT_POST, 'id');
@@ -123,7 +126,12 @@ class AdminController extends BaseController{
        echo json_encode($resData);
    }
    
-   //Сделано
+   /**
+    * Добавление студента
+    * 
+    * @return json массив[success, message]
+    * Массив содержит информацию о результате операции
+    */
    public function addstudentAction() {
         $name = filter_input(INPUT_POST, 'student_name');
         $group = filter_input(INPUT_POST, 'student_group');
@@ -133,7 +141,12 @@ class AdminController extends BaseController{
         echo json_encode($resData);
    }
 
-   //Сделано
+   /**
+    * Изменение информации студента
+    * 
+    * @return json массив[success, message]
+    * Массив содержит информацию о результате операции
+    */
    public function updatestudentAction() {
         $id = filter_input(INPUT_POST, 'id');
         $newName = filter_input(INPUT_POST, 'newName');
@@ -144,7 +157,12 @@ class AdminController extends BaseController{
         echo json_encode($resData);
    }
 
-   //Сделано
+   /**
+    * Удаление студента
+    * 
+    * @return json массив[success, message]
+    * Массив содержит информацию о результате операции
+    */
    function deletestudentAction() {
         $id = filter_input(INPUT_POST, 'id');
     
@@ -153,7 +171,12 @@ class AdminController extends BaseController{
         echo json_encode($resData);
    }
    
-   // СДЕЛАНО
+   /**
+    * Добавление предодавателя
+    * 
+    * @return json массив[success, message]
+    * Массив содержит информацию о результате операции
+    */
    public function addteacherAction() {
     $login = trim(filter_input(INPUT_POST, 'login'));
     $name = filter_input(INPUT_POST, 'name');
@@ -165,7 +188,12 @@ class AdminController extends BaseController{
     echo json_encode($resData);
    }
 
-   //Сделано
+   /**
+    * Изменение информации преподавателя
+    * 
+    * @return json массив[success, message]
+    * Массив содержит информацию о результате операции
+    */
    public function updateteacherAction() {
     $id = filter_input(INPUT_POST, 'teacherId');
     $name = filter_input(INPUT_POST, 'newName');
@@ -178,7 +206,12 @@ class AdminController extends BaseController{
     echo json_encode($resData);
    }
 
-   //Сделано
+   /**
+    * Удаление преподавателя
+    * 
+    * @return json массив[success, message]
+    * Массив содержит информацию о результате операции
+    */
    function deleteteacherAction() {
         $id = filter_input(INPUT_POST, 'id');
         $resData = $this->userClass->DeleteTeacher($id);
@@ -186,7 +219,12 @@ class AdminController extends BaseController{
         echo json_encode($resData);
    }
    
-   // Сделано
+   /**
+    * Добавление лабораторной работы
+    * 
+    * @return json массив[success, message]
+    * Массив содержит информацию о результате операции
+    */
    public function addlabAction() {
        $title = filter_input(INPUT_POST, 'lab_title');    
        $task = filter_input(INPUT_POST, 'lab_task');
@@ -197,7 +235,12 @@ class AdminController extends BaseController{
         echo json_encode($resData);
    }
 
-   //Сделано
+   /**
+    * Изменение информации лабораторной работы
+    * 
+    * @return json массив[success, message]
+    * Массив содержит информацию о результате операции
+    */
    public function updatelabAction() {
         $labId = filter_input(INPUT_POST, 'labId');
         $Number = filter_input(INPUT_POST, 'newNumber');
@@ -211,7 +254,12 @@ class AdminController extends BaseController{
         echo json_encode($resData);
    }
 
-   //Сделано
+   /**
+    * Удаление студента
+    * 
+    * @return json массив[success, message]
+    * Массив содержит информацию о результате операции
+    */
    function deletelabAction() {
        $id = filter_input(INPUT_POST, 'id');
     

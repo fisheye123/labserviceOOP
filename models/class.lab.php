@@ -1,7 +1,7 @@
 <?php
 
+// Класс лабораторных работ
 class Lab{
-    
     
     // Массив info:
     // id
@@ -12,8 +12,6 @@ class Lab{
     // access
     // course_id
     private $info = array();
-    private $labResult;
-    private $SQLBase;
     
     function __construct(array $info){
         $info = array_values($info);
@@ -25,23 +23,28 @@ class Lab{
         $this->info['access'] = $info[5];
         $this->info['course_id'] = $info[6];
     }
-    function __destruct(){}
     
+    
+    
+    /**
+     * Получить информацию об объекте
+     * @return array - информация о лабораторной работе
+     */
     public function GetInfo(){
         return $this->info;
     }
-    public function SetInfo(){}
-    public function GetAttachments() {}
-    public function SetAttachments() {}
     
-    public function GetCourse($id) {
-        
-    }
-    
-    public function SetCourse() {}
-    public function GetLabResult() {}
-    
-    public function SetLabResult() {}
+//    Пока не используется
+//    private $labResult;
+//    private $SQLBase;
+//    function __destruct(){}
+//    public function SetInfo(){}
+//    public function GetAttachments() {}
+//    public function SetAttachments() {}
+//    public function GetCourse($id) {}
+//    public function SetCourse() {}
+//    public function GetLabResult() {}
+//    public function SetLabResult() {}
 }
 
 
