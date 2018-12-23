@@ -1,6 +1,6 @@
 {# Шаблон вывода курса для студента #}
 
-{% extends "base.tpl" %}
+{% extends "teacherBase.tpl" %}
 
 {% block content %}
 
@@ -12,10 +12,11 @@
             <div class="course-form__wrapper course-form__wrapper_labs">
                 {% for lab in rsLabs %}
                     <ul class="menu-list">
-                        <li class="menu-list__title"><a href="/course/{{ lab.course_id }}/lab/{{ lab.id }}/">Лабораторная №{{ lab.number }} - {{ lab.title }}</a></li>
-                    </ul>                
+                        <li class="menu-list__title"><a href="?controller=Teacher&action=lab&id={{ lab.id }}">Лабораторная №{{ lab.number }} - {{ lab.title }}</a></li>
+                    </ul>                           
                 {% endfor %}
-                <a href="/lab/labadd/" class="button">Добавить лабораторную</a>
+                <a href="?controller=Teacher&action=labadd" class="button">Добавить лабораторную</a>
+                <a href="?controller=Teacher&action=grade&id={{ rsCourse.id }}" class="button">Оценки за курс</a>
             </div>
         </form>  
     </div>

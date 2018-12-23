@@ -11,8 +11,7 @@ abstract class BaseController{
      * @param object $userClass объект пользователя
      * @param object $twig объект шаблонизатора
      */
-    function __construct($userClass, $twig){
-        $this->userClass = $userClass;
+    function  __construct($twig){
         $this->twig = $twig;
     }
     
@@ -23,6 +22,7 @@ abstract class BaseController{
      * Выход из авторизации
      */
     public function logoutAction(){
+        unset($_SESSION[get_class($this->userClass)]);
         unset($_SESSION['User']);
         $this->redirect();
     }

@@ -6,6 +6,56 @@ class DBSQL{
     private $db; //объект соединения с базой данных
     private $lastResult; // результат последней операции
     
+    //Переменная команды WHERE
+    private $whereLine;
+    
+    //Переменные для команды LIMIT
+    private $limitLine;
+    
+    //Переменные для команды ORDER
+    private $orderLine;
+    
+    public function SetWhere($condition, $operator = null){
+        $whereArray = array();
+        $whereOperator = " AND ";
+        if ($operator){
+            strtoupper($operator);
+            $whereOperator = " $operator ";
+        }
+        
+        foreach ($condition as $key => $field){
+            if (!is_array($field)){
+                array_push($whereArray, "`$key` = '$field'"); 
+                continue;
+            }
+            $keyName = array_keys($condition)[0];
+            foreach ($field as $number => $value){
+                array_push($whereArray, "`$keyName` = '$value'");
+            }
+        }
+        
+        $conditionStr = implode($whereArray, $whereOperator);
+        $this->whereLine = "WHERE ($conditionStr) ";
+    }
+    
+    public function SetLimit($limit){
+        $this->limitLine = "LIMIT $limit ";
+    }
+    
+    public function SetOrder($order){
+        $this->orderLine = "ORDER BY `$order`";    
+    }
+    
+    public function SetDefaultLines(){
+        $this->whereLine = null;
+        $this->limitLine = null;
+        $this->orderLine = null;
+    }
+    
+    public function GetLastInsertId(){
+        return $this->db->insert_id;
+    }
+    
     /**
      * Получить результат последней операции
      * 
@@ -15,12 +65,8 @@ class DBSQL{
         return $this->lastResult;
     }
     
-    /**
-     * Получить объект соединения с БД
-     * @return object объект соединения с БД
-     */
-    public function GetDataBase(){
-        return $this->db;
+    public function GetSafeString($unsafeStr){
+        return htmlspecialchars($this->db->real_escape_string($unsafeStr));
     }
     
     private function __construct(){ // конструктор отрабатывает один раз при вызове DBSQL::GetInstance();
@@ -40,9 +86,8 @@ class DBSQL{
     //т.к. это требуется при создании Singleton'а
     private function __clone(){}
     
-    //Восстанавливаем соединение после десериализации
-    public function __wakeup(){
-            $this->db = new mysqli(HOST, USER, PASSWORD, DATABASE);
+    //Закрыть этот метод обязывает паттерн проектирования
+    private function __wakeup(){
     }
     
     // Получение(создание, если не создан ранее) объекта класса
@@ -59,6 +104,7 @@ class DBSQL{
      * @return boolean удачное выполнение запроса (true - удачно)
      */
     private function query($sql){
+        $this->SetDefaultLines();
         $rs = $this->db->query($sql);
 
         //Если количество строк отрицательное, то запрос некорректный
@@ -107,17 +153,17 @@ class DBSQL{
      * @return boolean удачное выполнение запроса (true - удачно)
      * TODO: Сделать работу с массивами
      */
-    public function select($selectValue, $table, $condition = FALSE, $limit = FALSE, $order = FALSE){
+    public function select($selectValue, $table){
         $sql = "SELECT `" . $selectValue . "` ";
         $sql .= "FROM `" . $table . "` ";
-        if ($condition){
-            $sql .= "WHERE (" . $condition . ") ";
+        if (isset($this->whereLine)){
+            $sql .= $this->whereLine;
         }
-        if ($limit){
-            $sql .= "LIMIT " . $limit . " ";
+        if (isset($this->limitLine)){
+            $sql .= $this->limitLine;
         }
-        if ($order){
-            $sql .= "ORDER BY `" . $order . "`";
+        if (isset($this->orderLine)){
+            $sql .= $this->orderLine;
         }
         return $this->query($sql);
     }
@@ -131,11 +177,27 @@ class DBSQL{
      * @return boolean удачное выполнение запроса (true - удачно)
      * TODO: Сделать работу с массивами
      */
-    public function insert($table, $selectValue, $values){
+    public function insert($table, $keyValue){
         $sql = "INSERT INTO `" . $table . "`";
         
-        $sql .= "(" . $selectValue . ")";
-        $sql .= "VALUES (" . $values . ")";
+        $ArrayKeys = array_keys($keyValue);
+        $ArrayValues = array_values($keyValue);
+        
+        //Защищаем строки значений, подаваемые в БД
+        foreach ($ArrayValues as $key => $field){
+            $ArrayValues[$key] = $this->GetSafeString($field);
+        }
+        // Собираем каждый массив с строку для команды INSERT
+        $setKeys = '`' . implode("`, `", $ArrayKeys) . '`';
+        $setValues = "'" . implode("', '", $ArrayValues) . "'";
+        
+        $sql .= "($setKeys)";
+        $sql .= "VALUES ($setValues) ";
+        
+        if ($this->limitLine){
+            $sql .= $this->limitLine;
+        }
+        
         return $this->query($sql);
     }
     
@@ -149,7 +211,18 @@ class DBSQL{
      */
     public function delete($table, $condition){
         $sql = "DELETE FROM `" . $table . "`";
-        $sql .= "WHERE " . $condition . "";
+        
+        $conditionArray = array();
+        foreach ($condition as $key => $field){
+            array_push($conditionArray, "`$key` = '$field'"); 
+        }
+        $conditionStr = implode($conditionArray, ", ");
+        
+        $sql .= "WHERE $conditionStr";
+        
+        if ($this->limitLine){
+            $sql .= $this->limitLine;
+        }
         return $this->query($sql);
     }
     
@@ -164,12 +237,27 @@ class DBSQL{
      * @return boolean удачное выполнение запроса (true - удачно)
      * TODO: Сделать работу с массивами
      */
-    public function update($table, $changedValues, $condition, $limit = FALSE){
+    public function update($table, $set, $where){
         $sql = "UPDATE `" . $table . "`";
-        $sql .= "SET " . $changedValues . " ";
-        $sql .= "WHERE " . $condition . " ";
-        if ($limit){
-            $sql .= "LIMIT `" . $limit . "`";
+        
+        $setInfo = array();
+        $setCondition = array();
+        foreach ($set as $key => $field){
+            array_push($setInfo, "`$key` = '$field'"); 
+        }
+        
+        foreach ($where as $key => $field){
+            array_push($setCondition, "`$key` = '$field'"); 
+        }
+        
+        $setStr = implode($setInfo, ", ");
+        $condStr = implode($setCondition, ", ");
+        
+        $sql .= "SET $setStr ";
+        $sql .= "WHERE $condStr ";
+        
+        if ($this->limitLine){
+            $sql .= $this->limitLine;
         }
         
         return $this->query($sql);

@@ -6,8 +6,8 @@ require '../config.php';
 //Контроллеры
 require_once '../controllers/AuthController.php';
 require_once '../controllers/AdminController.php';
-//require_once '../controllers/TeacherController.php';
-//require_once '../controllers/CourseController.php';
+require_once '../controllers/TeacherController.php';
+require_once '../controllers/CourseController.php';
 
 require_once '../models/class.db.php';
 require_once '../models/class.auth.php';
@@ -41,19 +41,12 @@ if(!isset($_SESSION['User'])){ //Нет пользователя в сессии
     $controllerName = 'Auth';
     $userObject = NULL;
 } else {
-    $userObject = $_SESSION['User'];
-    $controllerName = get_class($_SESSION['User']);
-    
-    // Теперь рассмотрим плохой вариант - у нас зарегестрирован
-    // один пользователь, а контроллер пришел другой
-    // TODO: Вниметельно посмотреть, что у нас приходит из js
-    //if ($controllerName !== filter_input(INPUT_GET, 'controller'))
-    //    $actionName = 'badaddress';
+    $controllerName = $_SESSION['User'];
 }
 
 $controllerName .= 'Controller';
 $actionName .= 'Action';
-$controllerObject = new $controllerName($userObject, $twig);
+$controllerObject = new $controllerName($twig);
 $controllerObject->$actionName();
 
 

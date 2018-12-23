@@ -1,1 +1,62 @@
+.lab-form
+{
+    display: flex;
+    flex-direction: column;
+}
+.lab-form__item
+{
+	
+}
+.btn {background: #f98500;}
+
+
+
+
+
+
+
+
+
+
+.lab-form__wrapper
+{
+	display: flex;
+}
+.lab-form__wrapper_main
+{
+	
+}
+.lab-form__wrapper_left
+{
+	width: 250px;
+	flex-shrink: 0;
+	flex-direction: column;
+}
+.lab-form__wrapper_right
+{
+	flex-grow: 1;
+	flex-direction: column;
+}
+
+.lab-form__checkbox_left
+{
+	flex-shrink: 0;
+	flex-direction: column;
+}
+.lab-form__checkbox_right
+{
+	flex-grow: 1;
+	flex-direction: column;
+}
+
+
+.lab-form__button_file
+{
+	align-self: flex-start;
+}
+.lab-form__button_submit
+{
+    align-self: center;
+}
+
 

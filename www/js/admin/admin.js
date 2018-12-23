@@ -12,6 +12,7 @@ function addCourse() {
         data: postData,
         dataType: 'text',
         success: function(data){
+            console.log(data);
             var jsonData = JSON.parse(data);
             alert(jsonData['message']);
             console.log(jsonData['message']);
@@ -49,6 +50,7 @@ function updateCourse(id) {
         data: postData,
         dataType: 'text',
         success: function(data){
+            console.log(data);
             var jsonData = JSON.parse(data);
             alert(jsonData['message']);
             console.log(jsonData['message']);
@@ -76,6 +78,7 @@ function deleteCourse(id) {
         data: postData,
         dataType: 'text',
         success: function(data){
+            console.log(data);
             var jsonData = JSON.parse(data);
             alert(jsonData['message']);
             console.log(jsonData['message']);
@@ -137,6 +140,7 @@ function updateStudent(id) {
         data: postData,
         dataType: 'text',
         success: function(data){
+            console.log(data);
             var jsonData = JSON.parse(data);
             alert(jsonData['message']);
             console.log(jsonData['message']);
@@ -164,6 +168,7 @@ function deleteStudent(id) {
         data: postData,
         dataType: 'text',
         success: function(data){
+            console.log(data);
             var jsonData = JSON.parse(data);
             alert(jsonData['message']);
             console.log(jsonData['message']);
@@ -191,6 +196,7 @@ function addTeacher() {
         data: postData,
         dataType: 'text',
         success: function(data){
+            console.log(data);
             var jsonData = JSON.parse(data);
             alert(jsonData['message']);
             console.log(jsonData['message']);
@@ -281,6 +287,7 @@ function addLab() {
         data: postData,
         dataType: 'text',
         success: function(data){
+            console.log(data);
             var jsonData = JSON.parse(data);
             alert(jsonData['message']);
             console.log(jsonData['message']);
@@ -322,6 +329,7 @@ function updateLab(id) {
         data: postData,
         dataType: 'text',
         success: function(data){
+            console.log(data);
             var jsonData = JSON.parse(data);
             alert(jsonData['message']);
             console.log(jsonData['message']);

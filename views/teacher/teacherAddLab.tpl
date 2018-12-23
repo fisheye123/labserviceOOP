@@ -1,6 +1,6 @@
 {# Шаблон вывода добавления лаборатоной для преподавателя #}
 
-{% extends "base.tpl" %}
+{% extends "teacherBase.tpl" %}
 
 {% block content %}
 
@@ -18,13 +18,25 @@
                     <select id="lab_course" name="lab_course">
                         <option value="0">Выберите курс</option>
                         {% for course in rsCourses %}
-                            <option value="{{ course.id }}">{{ course.title }}</option>
+                            <option id="course_id" value="{{ course.id }}">{{ course.title }}</option>
                         {% endfor %}
                     </select>
-                    <button class="add-lab-form__button add-lab-form__button_file">Прикрепить файл</button>
+                    
+                    <div class="file-form-wrap">
+                        <div class="file-upload">
+                            <label class="file-label">
+                                <input id="file" type="file" name="file" onchange="getFileParam();" />
+                                <span>Выберите файл</span><br />
+                            </label>
+                        </div>
+                        <div id="preview1">&nbsp;</div>
+                        <div id="file-name1">&nbsp;</div>
+                        <div id="file-size1">&nbsp;</div>
+                    </div>
                 </div>
             </div>
-            <input class="add-lab-form__button add-lab-form__button_submit" type="button" onclick="addLab();" value="Добавить"><br>
+                    
+            <button onclick="addLab();">Отправить</button>
         </form>
     </div>
 

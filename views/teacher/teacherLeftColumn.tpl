@@ -8,6 +8,7 @@
                         {% for lab in course['lab'] %}
                             <li class="menu-list__sub-item"><a href="?controller=Teacher&action=lab&id={{ lab.id }}">{{ lab.title }}</a></li>
                         {% endfor %}
+                        <li class="menu-list__sub-item"><a href="?controller=Teacher&action=grade&id={{ course.id }}">Оценки за курс</a></li>
                     </ul>
                 {% endif %}
             </li>

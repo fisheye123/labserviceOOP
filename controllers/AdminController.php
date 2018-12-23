@@ -5,6 +5,11 @@ require_once 'BaseController.php';
 //Контроллер администратора
 class AdminController extends BaseController{
     
+    function __construct($twig) {
+        $this->userClass = new Admin();
+        $this->twig = $twig;
+    }
+    
     /**
      * Загрузка главной страницы администратора
      */ 
@@ -68,6 +73,7 @@ class AdminController extends BaseController{
     */
    public function studentAction() {
         $rsStudent = $this->userClass->ShowStudent();
+        print_r($rsStudent);
        
         $tpppl = $this->myLoadTemplate('adminStudent');
         echo $tpppl->render(array(

@@ -15,7 +15,7 @@
         <header class="header">
             <div class="user-block">
                 {% if arTeacher is defined %}
-                    {{ arTeacher['name'] }}<br />
+                <a class="user-block__name" href="?controller=Teacher&action=about" >{{ arTeacher['name'] }}</a><br />
                     <a href="?controller=Auth&action=logout" id="teacherLogoutImg">
                         <div class="exit">
                             <!-- Поправить линк. Нужно чтобы доставал через Twig TemplateWebPath -->
@@ -24,6 +24,24 @@
                     </a>
                 {% endif %}
             </div>
+            
+            {% if crumbs is not empty %}
+                <nav class="bread-crumbs">
+                    <ul class="bread-crumbs__list">                               
+                        {% for item in crumbs %}                
+                            {% if item['url'] is not empty %}
+                                <li class="bread-crumbs__item">
+                                    {% if item['url'] is not empty %}
+                                        <a href="{{ item['url'] }}">{{ item['text'] }}</a>
+                                    {% else %}
+                                        {{ item['text'] }}
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </nav>
+            {% endif %}
         </header>
         
         <main class="main-block">

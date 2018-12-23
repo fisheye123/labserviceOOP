@@ -4,8 +4,8 @@
     <title>{{ title }}</title>
     <meta charset="utf-8">
     <!-- Поправить линк. Нужно чтобы доставал через Twig TemplateWebPath -->
-    <link rel="stylesheet" href="../www/css/course/course.css" type="text/css"/>
     <link rel="stylesheet" href="../www/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="../www/css/course/course.css" type="text/css"/>
     <script src="../www/js/jquery-3.3.1.min.js"></script>
     <script src="../www/js/main.js"></script>
     <script src="../www/js/course/course.js"></script>
